@@ -5,7 +5,7 @@ public class UIManager : MonoBehaviour
 {
     private int score ;
     private float currentTime;
-    private const float initTime = 60;
+    private const float initTime = 5;
 
     private GameObject _last = null;
 
@@ -39,13 +39,13 @@ public class UIManager : MonoBehaviour
             OpenWindow(0);
         }
 
-        if(game.activeSelf)
+        if(game.activeSelf && !result.activeSelf)
         {
             currentTime -= Time.deltaTime;
-            if(currentTime <=0)
+            if(currentTime <= 0)
             {
-                Destroy(FindObjectOfType<Ball>().gameObject);
-                OpenWindow(4);
+                GameManager.Instance.EndGame();
+                OpenWindow(5);
 
                 return;
             }
@@ -76,7 +76,7 @@ public class UIManager : MonoBehaviour
 
     public void OpenWindow(int windowIndex)
     {
-        if(_last && windowIndex != 4)
+        if(_last && windowIndex != 4 && windowIndex != 5)
         {
             _last.SetActive(false);
         }

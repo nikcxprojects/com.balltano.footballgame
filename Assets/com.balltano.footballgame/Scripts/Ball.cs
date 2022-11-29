@@ -8,6 +8,8 @@ public class Ball : MonoBehaviour
     {
         Vector2 toPlayer = new Vector2(FindObjectOfType<Player>().transform.position.x, Random.Range(-3.0f, 3.0f)) - (Vector2)transform.position;
         transform.up = toPlayer;
+
+        Destroy(gameObject, 2.0f);
     }
 
     private void Update()

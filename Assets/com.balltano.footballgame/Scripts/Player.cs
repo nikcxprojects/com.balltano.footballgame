@@ -20,8 +20,14 @@ public class Player : MonoBehaviour
         transform.position = new Vector2(transform.position.x, _camera.ScreenToWorldPoint(Input.mousePosition).y);
     }
 
-    private void OnTriggerEnter2D(Collider2D _)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
+        if(SettingsManager.VibraEnable)
+        {
+            Handheld.Vibrate();
+        }
+
+        Destroy(collider.gameObject);
         GameManager.Instance.uiManager.UpdateScore();
     }
 }
