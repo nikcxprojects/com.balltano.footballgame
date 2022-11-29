@@ -11,8 +11,8 @@ public class LeaderboardManager : MonoBehaviour
     {
         for(int i = 0; i < container.childCount; i++)
         {
-            Text leader = container.GetChild(i).GetComponent<Text>();
-            leader.text = $"{i + 1} scored <color=yellow>{Random.Range((i+2) * 100, (i+3) * 100)}</color> points";
+            Text leader = container.GetChild(i).GetChild(1).GetComponentInChildren<Text>();
+            leader.text = string.Format("{0:0000}", Random.Range((i + 2) * 100, (i + 3) * 100));
         }
     }
 }
