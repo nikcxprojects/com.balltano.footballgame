@@ -5,50 +5,93 @@ public class SettingsManager : MonoBehaviour
 {
     [Space(10)]
     [SerializeField] AudioSource loop;
-    [SerializeField] Button soundBtn;
+    [SerializeField] Button soundBtnOff;
+    [SerializeField] Button soundBtnOn;
 
     [Space(10)]
     [SerializeField] AudioSource sfx;
-    [SerializeField] Button sfxBtn;
+    [SerializeField] Button sfxBtnOff;
+    [SerializeField] Button sfxBtnOn;
 
     [Space(10)]
-    [SerializeField] Button vibtoBtn;
+    [SerializeField] Button vibtoBtnOff;
+    [SerializeField] Button vibtoBtnOn;
 
-    private const string active = "#FFEB00";
-    private const string disable = "#0F4839";
+    private const string active = "#FF6600";
+    private const string disable = "#3C424D";
 
     public static bool VibraEnable { get; set; } = true;
 
     private void Start()
     {
-        soundBtn.onClick.AddListener(() =>
+        soundBtnOff.onClick.AddListener(() =>
         {
-            loop.mute = !loop.mute;
+            loop.mute = true;
 
-            string target = loop.mute ? disable : active;
-            string status = loop.mute ? "OFF" : "ON";
+            ColorUtility.TryParseHtmlString(active, out Color activeColor);
+            soundBtnOff.GetComponent<Image>().color = activeColor;
 
-            soundBtn.GetComponent<Text>().text = $"MUSIC      <color={target}>{status}</color>";
+            ColorUtility.TryParseHtmlString(disable, out Color disableColor);
+            soundBtnOn.GetComponent<Image>().color = disableColor;
         });
 
-        sfxBtn.onClick.AddListener(() =>
+        soundBtnOn.onClick.AddListener(() =>
         {
-            sfx.mute = !sfx.mute;
+            loop.mute = false;
 
-            string target = sfx.mute ? disable : active;
-            string status = sfx.mute ? "OFF" : "ON";
+            ColorUtility.TryParseHtmlString(active, out Color activeColor);
+            soundBtnOn.GetComponent<Image>().color = activeColor;
 
-            sfxBtn.GetComponent<Text>().text = $"SFX           <color={target}>{status}</color>";
+            ColorUtility.TryParseHtmlString(disable, out Color disableColor);
+            soundBtnOff.GetComponent<Image>().color = disableColor;
         });
 
-        vibtoBtn.onClick.AddListener(() =>
+        sfxBtnOff.onClick.AddListener(() =>
         {
-            VibraEnable = !VibraEnable;
+            sfx.mute = true;
 
-            string target = VibraEnable ? active : disable;
-            string status = VibraEnable ? "ONN" : "OFF";
+            ColorUtility.TryParseHtmlString(active, out Color activeColor);
+            sfxBtnOff.GetComponent<Image>().color = activeColor;
 
-            vibtoBtn.GetComponent<Text>().text = $"VIBRA       <color={target}>{status}</color>";
+            ColorUtility.TryParseHtmlString(disable, out Color disableColor);
+            sfxBtnOn.GetComponent<Image>().color = disableColor;
         });
+
+        sfxBtnOn.onClick.AddListener(() =>
+        {
+            sfx.mute = false;
+
+            ColorUtility.TryParseHtmlString(active, out Color activeColor);
+            sfxBtnOn.GetComponent<Image>().color = activeColor;
+
+            ColorUtility.TryParseHtmlString(disable, out Color disableColor);
+            sfxBtnOff.GetComponent<Image>().color = disableColor;
+        });
+
+        vibtoBtnOff.onClick.AddListener(() =>
+        {
+            VibraEnable = false;
+
+            ColorUtility.TryParseHtmlString(active, out Color activeColor);
+            vibtoBtnOff.GetComponent<Image>().color = activeColor;
+
+            ColorUtility.TryParseHtmlString(disable, out Color disableColor);
+            vibtoBtnOn.GetComponent<Image>().color = disableColor;
+        });
+
+        vibtoBtnOn.onClick.AddListener(() =>
+        {
+            VibraEnable = true;
+
+            ColorUtility.TryParseHtmlString(active, out Color activeColor);
+            vibtoBtnOn.GetComponent<Image>().color = activeColor;
+
+            ColorUtility.TryParseHtmlString(disable, out Color disableColor);
+            vibtoBtnOff.GetComponent<Image>().color = disableColor;
+        });
+
+        soundBtnOn.onClick.Invoke();
+        sfxBtnOn.onClick.Invoke();
+        vibtoBtnOn.onClick.Invoke();
     }
 }
