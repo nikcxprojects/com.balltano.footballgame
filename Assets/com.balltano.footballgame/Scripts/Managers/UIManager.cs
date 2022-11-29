@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject result;
 
     [Space(10)]
+    public Transform border;
+
+    [Space(10)]
     [SerializeField] Text scoreText;
     [SerializeField] Text finalScoreText;
 
@@ -26,18 +29,13 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         OpenWindow(0);
-
-        Ball.OnPressed += () =>
-        {
-            UpdateScore();
-        };
     }
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape) && game.activeSelf && !pause.activeSelf)
         {
-            Destroy(FindObjectOfType<Ball>().gameObject);
+            GameManager.Instance.EndGame();
             OpenWindow(0);
         }
 
@@ -59,11 +57,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void UpdateScore()
+    public void UpdateScore()
     {
-        score += Random.Range(2, 6);
-
-        scoreText.text = $"{score}";
+        scoreText.text = $"{++score}";
         finalScoreText.text = scoreText.text;
     }
 
