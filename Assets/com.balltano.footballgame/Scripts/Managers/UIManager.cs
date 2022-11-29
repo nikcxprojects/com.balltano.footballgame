@@ -5,7 +5,7 @@ public class UIManager : MonoBehaviour
 {
     private int score ;
     private float currentTime;
-    private const float initTime = 5;
+    private const float initTime = 60;
 
     private GameObject _last = null;
 
@@ -76,7 +76,7 @@ public class UIManager : MonoBehaviour
 
     public void OpenWindow(int windowIndex)
     {
-        if(_last && windowIndex != 4 && windowIndex != 5)
+        if(_last && windowIndex != 4)
         {
             _last.SetActive(false);
         }

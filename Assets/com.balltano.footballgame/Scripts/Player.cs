@@ -1,8 +1,12 @@
 using UnityEngine;
+using System;
+
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
     private Camera _camera;
+    public static Action BallCollected { get; set; } = delegate { };
 
     private void Awake()
     {
@@ -27,6 +31,7 @@ public class Player : MonoBehaviour
             Handheld.Vibrate();
         }
 
+        BallCollected?.Invoke();
         Destroy(collider.gameObject);
         GameManager.Instance.uiManager.UpdateScore();
     }
